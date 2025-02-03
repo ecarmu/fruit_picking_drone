@@ -1,0 +1,9 @@
+train: "C:/Users/ardah/OneDrive/Masaüstü/yazılım/drone_project/oidv7-Tooklit/dataset/train"
+val:   "C:/Users/ardah/OneDrive/Masaüstü/yazılım/drone_project/oidv7-Tooklit/dataset/validation"
+
+# Number of classes in your dataset
+nc: 2
+
+# Class names
+names: ['Ball', 'Christmas Tree']
+
