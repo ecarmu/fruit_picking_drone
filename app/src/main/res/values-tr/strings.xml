@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">fruit_picking_drone_app</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="menu_home">Ana Sayfa</string>
+    <string name="menu_camera">Kamera</string>
+    <string name="menu_data">Veri Listesi</string>
+    <string name="menu_drones">Drone Listesi</string>
+    <string name="menu_settings">Ayarlar</string>
+    <string name="welcome">Hoş geldiniz</string>
+    <string name="login_to_get_started">Başlamak için giriş yapın</string>
+    <string name="login">Giriş Yap</string>
+    <string name="summary_text">Son Toplama Tarihi...</string>
+    <string name="dark_theme">Koyu Tema</string>
+</resources>
