@@ -6,8 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.fruit_picking_drone_app.R
 import com.example.fruit_picking_drone_app.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -25,6 +27,9 @@ class HomeFragment : Fragment() {
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+
 
         // "Welcome" yazısını ayarla
         binding.welcomeText.text = "Welcome"

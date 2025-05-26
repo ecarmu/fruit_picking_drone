@@ -19,6 +19,14 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="NavigationNoTint" parent="ThemeOverlay.Material3.NavigationView">
+        <item name="itemIconTint">@null</item>
+    </style>
+
+    <style name="NavItemBackgroundTest" parent="">
+        <item name="android:background">#FFFF00</item> <!-- Sarı -->
+    </style>
+
     <style name="Theme.Fruit_picking_drone_app.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Fruit_picking_drone_app.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
