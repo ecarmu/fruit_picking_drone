@@ -15,7 +15,6 @@ object DatabaseProvider {
                 AppDatabase::class.java,
                 "fruit_drone_database"
             )
-                .fallbackToDestructiveMigration() // versiyon değiştiğinde sıfırla (geliştirme için pratik)
                 .build()
             INSTANCE = instance
             instance

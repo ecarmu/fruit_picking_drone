@@ -3,35 +3,70 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@id/loginFragment">
 
+    <!-- Login Fragment -->
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/loginFragment"
+        android:name="com.example.fruit_picking_drone_app.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_loginFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
+    </fragment>
+
+    <!-- Signup Fragment -->
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.example.fruit_picking_drone_app.ui.login.SignupFragment"
+        android:label="Sign Up"
+        tools:layout="@layout/fragment_signup" />
+
+    <!-- Home Fragment -->
+    <fragment
+        android:id="@+id/homeFragment"
         android:name="com.example.fruit_picking_drone_app.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" />
 
+    <!-- Diğer nav itemlar -->
     <fragment
-        android:id="@+id/nav_camera"
+        android:id="@+id/cameraFragment"
         android:name="com.example.fruit_picking_drone_app.ui.camera.CameraFragment"
-        android:label="@string/menu_camera"
+        android:label="Camera"
         tools:layout="@layout/fragment_camera" />
 
     <fragment
-        android:id="@+id/nav_data"
-        android:name="com.example.fruit_picking_drone_app.ui.camera.CameraFragment"
-        android:label="@string/menu_data"
+        android:id="@+id/dataFragment"
+        android:name="com.example.fruit_picking_drone_app.ui.data.DataFragment"
+        android:label="Data"
         tools:layout="@layout/fragment_data" />
 
     <fragment
-        android:id="@+id/nav_drones"
+        android:id="@+id/dronesFragment"
         android:name="com.example.fruit_picking_drone_app.ui.drones.DronesFragment"
-        android:label="@string/menu_drones"
-        tools:layout="@layout/fragment_drones" />
+        android:label="Drones"
+        tools:layout="@layout/fragment_drones">
+    <action
+        android:id="@+id/action_dronesFragment_to_addDroneFragment"
+        app:destination="@id/addDroneFragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_settings"
-        android:name="com.example.fruit_picking_drone_app.ui.camera.CameraFragment"
-        android:label="@string/menu_settings"
+        android:id="@+id/settingsFragment"
+        android:name="com.example.fruit_picking_drone_app.ui.settings.SettingsFragment"
+        android:label="Settings"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/addDroneFragment"
+        android:name="com.example.fruit_picking_drone_app.ui.drones.AddDroneFragment"
+        android:label="Add Drone"
+        tools:layout="@layout/fragment_add_drone" />
+
 </navigation>
+

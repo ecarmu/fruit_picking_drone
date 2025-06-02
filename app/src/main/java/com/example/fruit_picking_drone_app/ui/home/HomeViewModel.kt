@@ -1,48 +1,60 @@
 package com.example.fruit_picking_drone_app.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import android.content.Context
 import androidx.appcompat.app.AppCompatDelegate
-
+import androidx.lifecycle.*
+import com.example.fruit_picking_drone_app.data.repository.HarvestRepository
+import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
 
-    // Kullanıcı giriş durumunu tutan LiveData (false: henüz giriş yapmamış)
-    private val _isUserLoggedIn = MutableLiveData<Boolean>(false)
+    private val _isUserLoggedIn = MutableLiveData(false)
     val isUserLoggedIn: LiveData<Boolean> = _isUserLoggedIn
 
-    // Mini özet verisini tutan LiveData (örneğin son toplama tarihi, toplanan meyve sayısı vs.)
-    private val _summaryText = MutableLiveData<String>("")
+    private val _summaryText = MutableLiveData("")
     val summaryText: LiveData<String> = _summaryText
 
-    // Koyu tema durumu: false = açık tema, true = koyu tema
-    private val _isDarkTheme = MutableLiveData<Boolean>(false)
+    private val _isDarkTheme = MutableLiveData(false)
     val isDarkTheme: LiveData<Boolean> = _isDarkTheme
 
-    // Dummy login fonksiyonu, bunu ayarlayacağım
-    fun loginUser() {
+    fun loginUser(context: Context) {
         viewModelScope.launch {
-            delay(1000)
+            saveLoginStatus(context, true)
             _isUserLoggedIn.value = true
-            fetchSummaryData()
+            fetchSummaryData(context)
         }
     }
 
-    // Dummy veritabanı, bunu sonra ayarlayacağım
-    fun fetchSummaryData() {
+    fun checkLoginStatus(context: Context) {
+        val sharedPref = context.getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
+        val loggedIn = sharedPref.getBoolean("isLoggedIn", false)
+        _isUserLoggedIn.value = loggedIn
+
+        if (loggedIn) {
+            fetchSummaryData(context)
+        }
+    }
+
+    fun saveLoginStatus(context: Context, loggedIn: Boolean) {
+        val sharedPref = context.getSharedPreferences("LoginPrefs", Context.MODE_PRIVATE)
+        with(sharedPref.edit()) {
+            putBoolean("isLoggedIn", loggedIn)
+            apply()
+        }
+    }
+
+    fun fetchSummaryData(context: Context) {
         viewModelScope.launch {
-            delay(500)
-            _summaryText.value = "Son Toplama Tarihi: 05/04/2025\nToplanan Meyve: 42"
-        }
-    }
+            try {
+                val repository = HarvestRepository(context)
+                val latestHarvest = repository.getLatestHarvest()
+                val chestnutCount = repository.getHarvestCount()
 
-    fun setDarkTheme(isDark: Boolean) {
-        AppCompatDelegate.setDefaultNightMode(
-            if (isDark) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-        )
+                val formattedDate = latestHarvest?.dateTime ?: "Unknown"
+                _summaryText.value = "Last Harvest: $formattedDate\nChestnuts Collected: $chestnutCount"
+            } catch (e: Exception) {
+                _summaryText.value = "Failed to load summary data."
+            }
+        }
     }
 }

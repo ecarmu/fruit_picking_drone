@@ -40,4 +40,11 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
             callback(user)
         }
     }
+
+    fun getUserByUsername(username: String, callback: (User?) -> Unit) {
+        viewModelScope.launch {
+            val user = repository.getUserByUsername(username)
+            callback(user)
+        }
+    }
 }

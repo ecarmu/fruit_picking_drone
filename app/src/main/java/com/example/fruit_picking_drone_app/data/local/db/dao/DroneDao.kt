@@ -15,6 +15,12 @@ interface DroneDao {
     @Query("SELECT * FROM drones WHERE pairedUserId = :userId")
     suspend fun getDronesForUser(userId: String): List<Drone>
 
+    @Query("SELECT COUNT(*) FROM drones")
+    suspend fun getDroneCount(): Int
+
     @Delete
     suspend fun deleteDrone(drone: Drone)
+
+    @Query("SELECT * FROM drones LIMIT 1")
+    suspend fun getFirstDrone(): Drone?
 }

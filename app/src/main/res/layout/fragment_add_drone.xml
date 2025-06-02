@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addDroneLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    tools:context=".ui.drones.AddDroneFragment">
+
+    <TextView
+        android:id="@+id/addDroneTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add New Drone"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginBottom="32dp" />
+
+    <EditText
+        android:id="@+id/editDroneId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Drone ID (e.g. from QR)"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/addDroneTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="24dp" />
+
+    <EditText
+        android:id="@+id/editDroneName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Drone Name"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/editDroneId"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/btnSaveDrone"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Save Drone"
+        app:layout_constraintTop_toBottomOf="@id/editDroneName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

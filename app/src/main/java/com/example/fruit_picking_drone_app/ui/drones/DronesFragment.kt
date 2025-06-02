@@ -1,38 +1,69 @@
 package com.example.fruit_picking_drone_app.ui.drones
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.fruit_picking_drone_app.R
+import com.example.fruit_picking_drone_app.data.repository.DroneRepository
 import com.example.fruit_picking_drone_app.databinding.FragmentDronesBinding
 
 class DronesFragment : Fragment() {
 
     private var _binding: FragmentDronesBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var viewModel: DronesViewModel
+    private lateinit var droneAdapter: DroneAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dronesViewModel =
-            ViewModelProvider(this).get(DronesViewModel::class.java)
-
         _binding = FragmentDronesBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textDrones
-        dronesViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        val repository = DroneRepository(requireContext())
+        val factory = DroneViewModelFactory(repository)
+        viewModel = ViewModelProvider(this, factory)[DronesViewModel::class.java]
+
+        binding.buttonAddDrone.setOnClickListener {
+            findNavController().navigate(R.id.action_dronesFragment_to_addDroneFragment)
         }
-        return root
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        droneAdapter = DroneAdapter(emptyList())
+        binding.recyclerDrones.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerDrones.adapter = droneAdapter
+
+        // Droneları gözlemleyip listeye aktarıyoruz
+        viewModel.drones.observe(viewLifecycleOwner) { droneList ->
+            Log.d("UI_DEBUG", "Dronelar geldi: $droneList")
+            droneAdapter.updateList(droneList)
+        }
+        binding.buttonAddDrone.setOnClickListener {
+            findNavController().navigate(R.id.action_dronesFragment_to_addDroneFragment)
+            }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val sharedPref = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+        val userId = sharedPref.getString("username", null)
+
+        if (userId != null) {
+            viewModel.loadDronesForUser(userId)
+        }
     }
 
     override fun onDestroyView() {

@@ -1,14 +1,13 @@
 package com.example.fruit_picking_drone_app.viewmodel
 
-import android.app.Application
 import androidx.lifecycle.*
 import com.example.fruit_picking_drone_app.data.local.db.entities.Drone
 import com.example.fruit_picking_drone_app.data.repository.DroneRepository
 import kotlinx.coroutines.launch
 
-class DroneViewModel(application: Application) : AndroidViewModel(application) {
+class DronesViewModel(private val droneRepository: DroneRepository) : ViewModel() {
 
-    private val repository = DroneRepository(application)
+    private val repository = droneRepository
 
     private val _drones = MutableLiveData<List<Drone>>()
     val drones: LiveData<List<Drone>> = _drones

@@ -23,4 +23,12 @@ class HarvestRepository(context: Context) {
     suspend fun deleteHarvest(harvest: Harvest) {
         harvestDao.deleteHarvest(harvest)
     }
+
+    suspend fun getLatestHarvest(): Harvest? {
+        return harvestDao.getLatestHarvest()
+    }
+
+    suspend fun getHarvestCount(): Int {
+        return harvestDao.getHarvestCount()
+    }
 }

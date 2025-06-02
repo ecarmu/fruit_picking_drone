@@ -17,4 +17,11 @@ interface HarvestDao {
 
     @Delete
     suspend fun deleteHarvest(harvest: Harvest)
+
+    @Query("SELECT * FROM harvests ORDER BY dateTime DESC LIMIT 1")
+    suspend fun getLatestHarvest(): Harvest?
+
+    @Query("SELECT COUNT(*) FROM harvests")
+    suspend fun getHarvestCount(): Int
+
 }
