@@ -2,6 +2,7 @@ package com.example.fruit_picking_drone_app.ui.home
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,11 +26,34 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val sharedPref = requireActivity().getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
-        val isLoggedIn = sharedPref.getBoolean("is_logged_in", false)
+        val isLoggedIn = sharedPref.getBoolean("isLoggedIn", false)
         val username = sharedPref.getString("username", "User")
 
-        binding.welcomeText.text = "Welcome"
-        binding.usernameText.text = if (isLoggedIn) "Hello, $username!" else "Please log in to continue"
+        // Debug logging
+        Log.d("HomeFragment", "=== LOGIN STATUS CHECK ===")
+        Log.d("HomeFragment", "isLoggedIn: $isLoggedIn")
+        Log.d("HomeFragment", "username: $username")
+        
+        // Check all shared preferences keys
+        val allPrefs = sharedPref.all
+        Log.d("HomeFragment", "All shared preferences: $allPrefs")
+        
+        // Check if user is logged out
+        if (!isLoggedIn) {
+            Log.d("HomeFragment", "USER IS LOGGED OUT - No login status found")
+        } else {
+            Log.d("HomeFragment", "USER IS LOGGED IN - Username: $username")
+        }
+        Log.d("HomeFragment", "=== END LOGIN STATUS CHECK ===")
+
+        // Since the app now opens directly from login, show a welcome message
+        binding.welcomeText.text = "Welcome to Fruit Picking Drone"
+        
+        if (isLoggedIn && username != "User") {
+            binding.usernameText.text = "Hello, $username! Ready to start harvesting?"
+        } else {
+            binding.usernameText.text = "Welcome! Ready to start harvesting with your drone?"
+        }
     }
 
     override fun onDestroyView() {

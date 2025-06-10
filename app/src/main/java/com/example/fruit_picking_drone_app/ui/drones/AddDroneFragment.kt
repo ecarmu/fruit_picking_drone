@@ -59,7 +59,11 @@ class AddDroneFragment : Fragment() {
             dronesViewModel.insertDrone(drone)
 
             Toast.makeText(requireContext(), "Drone added successfully", Toast.LENGTH_SHORT).show()
+            findNavController().previousBackStackEntry
+                ?.savedStateHandle
+                ?.set("drone_added", true)
             findNavController().navigateUp()
+
         }
     }
 

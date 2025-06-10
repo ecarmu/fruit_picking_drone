@@ -9,7 +9,7 @@ import com.example.fruit_picking_drone_app.data.local.db.entities.*
 
 @Database(
     entities = [User::class, Drone::class, Harvest::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -28,7 +28,8 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "fruit_picking_database"
-                ).build()
+                )   .fallbackToDestructiveMigration(true)
+                    .build()
                 INSTANCE = instance
                 instance
             }

@@ -1,5 +1,7 @@
 package com.example.fruit_picking_drone_app.ui.drones
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +32,9 @@ class DroneAdapter(private var drones: List<Drone>) :
         holder.lastActive.text = "Last Active: -"
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun updateList(newList: List<Drone>) {
+        Log.d("UI_DEBUG", "Adapter'a gelen liste: $newList")
         drones = newList
         notifyDataSetChanged()
     }

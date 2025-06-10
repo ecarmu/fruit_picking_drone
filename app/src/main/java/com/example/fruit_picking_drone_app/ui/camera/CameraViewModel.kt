@@ -6,8 +6,6 @@ import androidx.lifecycle.ViewModel
 
 class CameraViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is gallery Fragment"
-    }
+    private val _text = MutableLiveData<String>("Live camera feed from your server! 🎥\nTap the button below to open the stream.")
     val text: LiveData<String> = _text
 }

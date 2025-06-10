@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">fruit_picking_drone_app</string>
+    <string name="app_name">Fruit Harvesting</string>
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="nav_header_title" translatable="false">Android Studio</string>
@@ -16,5 +16,5 @@
     <string name="login">Login</string>
     <string name="summary_text">Son Toplama Tarihi: ...</string>
     <string name="dark_theme">Dark Theme</string>
-    <string name="user">user</string>
+    <string name="user" translatable="false">user</string>
 </resources>

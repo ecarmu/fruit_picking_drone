@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -42,6 +41,24 @@ class DronesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        findNavController().currentBackStackEntry
+            ?.savedStateHandle
+            ?.getLiveData<Boolean>("drone_added")
+            ?.observe(viewLifecycleOwner) { added ->
+                if (added == true) {
+                    // kullanıcının ID’sini al
+                    val sharedPref = requireActivity()
+                        .getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+                    val userId = sharedPref.getString("username", null)
+                    if (userId != null) {
+                        viewModel.loadDronesForUser(userId)
+                    }
+                    // flag’i temizle ki bir daha tetiklemesin
+                    findNavController().currentBackStackEntry
+                        ?.savedStateHandle
+                        ?.remove<Boolean>("drone_added")
+                }
+            }
         droneAdapter = DroneAdapter(emptyList())
         binding.recyclerDrones.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerDrones.adapter = droneAdapter
@@ -62,6 +79,7 @@ class DronesFragment : Fragment() {
         val userId = sharedPref.getString("username", null)
 
         if (userId != null) {
+            Log.d("UI_DEBUG", "onResume'da yüklenen kullanıcı: $userId")
             viewModel.loadDronesForUser(userId)
         }
     }
