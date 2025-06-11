@@ -7,10 +7,6 @@
     tools:context=".ui.settings.SettingsFragment"
     android:padding="16dp">
 
-    <!-- Title -->
-
-    <!-- Dark Mode Switch -->
-
     <TextView
         android:id="@+id/settingsTitle"
         android:layout_width="wrap_content"
@@ -42,10 +38,6 @@
         app:layout_constraintTop_toTopOf="@id/darkModeLabel"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-    <!-- Account Info and Username -->
-
-    <!-- Notifications Switch -->
 
     <TextView
         android:id="@+id/accountInfoLabel"
@@ -89,10 +81,6 @@
         app:layout_constraintTop_toTopOf="@id/notificationsLabel"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-    <!-- About Button -->
-
-    <!-- Feedback Button -->
 
     <Button
         android:id="@+id/aboutButton"

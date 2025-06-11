@@ -7,6 +7,6 @@ import java.util.*
 @Entity(tableName = "harvests")
 data class Harvest(
     @PrimaryKey val sessionId: String = UUID.randomUUID().toString(),
-    val timestamp: Long, // Unix timestamp
+    val timestamp: Long,
     val count: Int
 )

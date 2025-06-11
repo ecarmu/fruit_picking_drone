@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <!-- Başlık -->
-
     <TextView
         android:id="@+id/welcomeText"
         android:layout_width="wrap_content"

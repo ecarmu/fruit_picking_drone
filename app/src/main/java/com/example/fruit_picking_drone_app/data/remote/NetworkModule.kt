@@ -1,4 +1,3 @@
-// com/example/fruit_picking_drone_app/data/remote/NetworkModule.kt
 package com.example.fruit_picking_drone_app.data.remote
 
 import com.squareup.moshi.Moshi

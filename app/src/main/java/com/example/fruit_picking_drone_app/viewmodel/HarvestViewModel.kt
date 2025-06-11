@@ -62,16 +62,4 @@ class HarvestViewModel(application: Application) : AndroidViewModel(application)
             _harvestCount.postValue(c)
         }
     }
-
-    /**
-     * “Pull to refresh” için: önce sunucudan çek, sonra Room’a yaz.
-     */
-    fun refreshFromServer(userId: String) {
-        viewModelScope.launch {
-            // IO dispatcher içinde retrofit + Room işlemleri
-            withContext(Dispatchers.IO) {
-                repository.refreshAll(userId)
-            }
-        }
-    }
 }

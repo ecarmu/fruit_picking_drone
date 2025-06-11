@@ -7,13 +7,11 @@ import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.Query
 
-// now matches your server's JSON exactly
 data class HarvestDto(
 
     @SerializedName("timestamp")
     val timestamp: Long,
 
-    // server field is "count"
     @SerializedName("count")
     val count: Int
 )

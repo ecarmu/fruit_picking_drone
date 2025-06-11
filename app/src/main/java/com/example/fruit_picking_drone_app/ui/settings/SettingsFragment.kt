@@ -40,7 +40,6 @@ class SettingsFragment : Fragment() {
 
         val switchNotifications = view.findViewById<Switch>(R.id.notificationSwitch)
         switchNotifications.setOnCheckedChangeListener { _, isChecked ->
-            // Add logic to enable/disable notifications
         }
     }
 }

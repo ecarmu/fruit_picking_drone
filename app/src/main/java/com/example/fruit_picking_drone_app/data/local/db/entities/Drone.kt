@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "drones")
 data class Drone(
-    @PrimaryKey val droneId: String, // QR koddan gelen unique ID
+    @PrimaryKey val droneId: String,
     val name: String,
     val pairedUserId: String
 )

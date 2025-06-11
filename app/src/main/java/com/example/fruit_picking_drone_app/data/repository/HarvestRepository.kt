@@ -48,8 +48,7 @@ class HarvestRepository(private val context: Context) {
         harvestDao.insertAll(harvests)
 
     /**
-     * 7. Uzak sunucudan çek, lokal DB'yi güncelle (pull-to-refresh mantığı).
-     *    Retrofit arayüzünde:
+     * 7. Uzak sunucudan çek, lokal DB'yi güncelle.
      *    @GET("/api/harvests") suspend fun getHarvests(): List<HarvestDto>
      */
     suspend fun refreshAll(userId: String) {

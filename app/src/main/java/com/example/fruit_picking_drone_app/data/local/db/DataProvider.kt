@@ -1,4 +1,3 @@
-// DatabaseProvider.kt
 package com.example.fruit_picking_drone_app.data.local.db
 
 import android.content.Context
@@ -16,7 +15,7 @@ object DatabaseProvider {
                 AppDatabase::class.java,
                 "fruit_drone_database"
             )
-                // ⚠️ allow destructive reset on version changes
+                // allow destructive reset on version changes
                 .fallbackToDestructiveMigration(true)
                 .build()
 
